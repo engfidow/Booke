@@ -42,8 +42,8 @@ function Login() {
     if (!validation()) return;
 
     try {
-      const response = await axios.post("http://localhost:5000/login", logininfo); // Adjust your API endpoint
-      const { token, Finduser } = response.data; // Assuming the response contains token and user info
+      const response = await axios.post("http://localhost:5000/customer/login", logininfo); // Adjust your API endpoint
+      const { token, checkUser } = response.data; // Assuming the response contains token and user info
 
       // Set the token in cookies (it will be stored for 1 hour)
       setCookie("auth_token", token, { path: "/", maxAge: 3600 });

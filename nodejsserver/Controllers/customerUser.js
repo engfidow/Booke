@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const path = require("path");
 
-const JWTSECRET = process.env.JWTSECRET
+const JWTSECRET = process.env.JWTSECRET || "HGRrwEJYTGU75hg346htfFDG657nbnfewgfjhLkiutygu?jgdjP"
 
 const storage = new  multer.diskStorage({
     destination: (req, file, cb)=>{
@@ -56,6 +56,7 @@ exports.userCustomerLogin = async (req, res) => {
         if(!isMatch) {
             return res.status(404).json({message: "Your credentials are incorrect 😭"});
         }
+        console.log("secret key is " + JWTSECRET)
 
         const token = jwt.sign({user_id: checkUser._id}, JWTSECRET,{expiresIn: "2d"});
         return res.status(200).json({message: "Success Login✅", token, checkUser});
