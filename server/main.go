@@ -20,6 +20,8 @@ import (
 func main() {
 	// Load environment variables from .env file
 	initializers.LoadVariabled()
+	originAdminPanel := os.Getenv("originAdminPanel")
+	originClientPanel := os.Getenv("originClientPanel")
 
 	// Get the port from the .env file, default to 8080 if not set
 	port := os.Getenv("PORT")
@@ -48,7 +50,7 @@ func main() {
 
 	// Set up CORS middleware
 	corsHandler := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:3000", "http://localhost:5173"}, // Allow React frontend origin
+		AllowedOrigins:   []string{originAdminPanel, originClientPanel}, // Allow React frontend origin
 		AllowedMethods:   []string{"GET", "POST", "PUT", "PATCH", "DELETE"},
 		AllowedHeaders:   []string{"Content-Type", "Authorization", "User-ID"},
 		AllowCredentials: true,

@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const multer = require("multer");
 const path = require("path");
 
-const JWTSECRET = "HGRrwEJYTGU75hg346htfFDG657nbnfewgfjhLkiutygu?jgdj}P"
+const JWTSECRET = process.env.JWTSECRET
 
 const storage = new  multer.diskStorage({
     destination: (req, file, cb)=>{

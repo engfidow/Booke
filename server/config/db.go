@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"log"
+	"os"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -15,7 +16,8 @@ var MongoClient *mongo.Client
 // ConnectDB establishes a connection to MongoDB
 func ConnectDB() *mongo.Client {
 	// Set client options and connect to MongoDB
-	clientOptions := options.Client().ApplyURI("mongodb+srv://golang:ZYmNTBZIel9in0H7@golangone.tlo7a.mongodb.net/?retryWrites=true&w=majority&appName=golangone")
+	dburl := os.Getenv("MongoDBurl")
+	clientOptions := options.Client().ApplyURI(dburl)
 
 	// Create a new MongoDB client
 	client, err := mongo.NewClient(clientOptions)
